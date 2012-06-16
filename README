@@ -1,0 +1,11 @@
+Site en PHP. 
+
+L'adaptation sur un émulateur dofus sera faite à la prochaine mise à jour. 
+
+Les fonctionnalités sont :
+-Nouveautés par sql, avec possibilité de commenter, et une gestion de celles-ci (suppression)
+-Panel admin : gestion des nouveautés, modification de rang (modérateur/admin/membre), et bannissement (accessible aux modérateurs & admins)
+-Panel membre avec tout ses modules (changement pseudonyme/mot de passe & mot de passe oublié)
+-Livre d'or avec 2 pages, enregistrement du dernier pseudo entré et mise en value les prochaine fois
+-inscription/connexion avec vérification de l’inexistence du nom de compte et pseudo à l'inscription
+-Statut bannis ip/compte : bloque l'accès au site.
