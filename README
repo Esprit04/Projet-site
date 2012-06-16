@@ -9,3 +9,8 @@ Les fonctionnalités sont :
 -Livre d'or avec 2 pages, enregistrement du dernier pseudo entré et mise en value les prochaine fois
 -inscription/connexion avec vérification de l’inexistence du nom de compte et pseudo à l'inscription
 -Statut bannis ip/compte : bloque l'accès au site.
+
+======================================================
+Installation :
+Executez projet.sql sur votre base de données, configurez "configuration.php".
+Supprimez le .git (dossier caché) et projet.sql.
