@@ -1,16 +1,22 @@
-Site en PHP. 
-
-L'adaptation sur un émulateur dofus sera faite à la prochaine mise à jour. 
+CMS pour ancestra/dérivés.
 
 Les fonctionnalités sont :
--Nouveautés par sql, avec possibilité de commenter, et une gestion de celles-ci (suppression)
+-Nouveautés par sql, avec possibilité de commenter, et une gestion de celles-ci.
 -Panel admin : gestion des nouveautés, modification de rang (modérateur/admin/membre), et bannissement (accessible aux modérateurs & admins)
 -Panel membre avec tout ses modules (changement pseudonyme/mot de passe & mot de passe oublié)
--Livre d'or avec 2 pages, enregistrement du dernier pseudo entré et mise en value les prochaine fois
--inscription/connexion avec vérification de l’inexistence du nom de compte et pseudo à l'inscription
+-inscription/connexion avec vérification de l’inexistence du nom de compte et pseudo à l'inscription plus un captcha.
 -Statut bannis ip/compte : bloque l'accès au site.
+-Pages liés à dofus : achats de points/vote...
 
 ======================================================
 Installation :
-Executez projet.sql sur votre base de données, configurez "configuration.php".
-Supprimez le .git (dossier caché) et projet.sql.
+Executez cms.sql sur votre base de données, configurez "configuration.php",
+Modifiez les idd/idp starpass dans la page crédit.php
+Supprimez le .git (dossier caché) et cms.sql/
+
+======================================================
+Pages à faire :
+-boutique
+-services
+======================================================
+Etat du projet : en pause.

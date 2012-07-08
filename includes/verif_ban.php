@@ -12,7 +12,7 @@ try
 	$donnees		=  $ban_ip -> fetch();
 	$ban_ip 		-> closeCursor();
 	//On vérifie si le compte du membre est bannit.
-	if (isset ($_SESSION['nom_de_compte']))
+	if (isset ($_SESSION['nom_utilisateur']))
 		{
 		$ban_compte		=  $bdd->prepare('SELECT COUNT(pseudo) AS compte FROM bannis WHERE pseudo = :pseudo LIMIT 0,1');
 		$ban_compte 	-> bindValue('pseudo', $_SESSION['pseudo'], PDO::PARAM_STR);

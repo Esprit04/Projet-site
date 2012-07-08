@@ -6,69 +6,64 @@ try
 	{
 	require('configuration.php');
 	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-	$bdd = new PDO('mysql:host='.$hote.';dbname='.$nomBDD, $ident_mysql, $mdp_mysql, $pdo_options);
+	$bdd = new PDO('mysql:host='.$hote.';dbname='.$nomBDD_other, $ident_mysql, $mdp_mysql, $pdo_options);
 	//Si on a envoyé le formulaire...
-	if (isset ($_POST['nom_de_compte']))
+	if (isset ($_POST['nom_utilisateur']))
 		{
 		//Et si une des entrées était vide, on affiche un message d'erreur et le formulaire.
-		if (empty ($_POST['nom_de_compte']) OR empty ($_POST['mot_de_passe']))
+		if (empty ($_POST['nom_utilisateur']) OR empty ($_POST['mot_de_passe']))
 			{
 			?>
-			<br/>Veuillez entrer toutes les données demandées.
+			<p style="color:#000000;">Veuillez entrer toutes les données demandées.</p>
 			<meta http-equiv='refresh' content='1.5; URL='>
 			<?php
 			}
 		//Sinon, on vérifie que le mot de passe rentré est bien lier au nom de compte.
 		else
 			{
-			$verif_compte		=  $bdd->prepare('SELECT mot_de_passe, rang, pseudo FROM comptes WHERE nom_de_compte = :nom_de_compte');
-			$verif_compte 		-> bindValue('nom_de_compte', $_POST['nom_de_compte'], PDO::PARAM_STR);
+			$verif_compte		=  $bdd->prepare('SELECT pass, level, pseudo FROM accounts WHERE account = :nom_utilisateur');
+			$verif_compte 		-> bindValue('nom_utilisateur', $_POST['nom_utilisateur'], PDO::PARAM_STR);
 			$verif_compte		-> execute();
 			$donnees_compte		=  $verif_compte 	-> fetch();
 			$verif_compte 		-> closeCursor();
 			//S'il correspond, on stock les informations nécessaire de la base de donnée dans une superglobale de session.
-			if ($_POST['mot_de_passe'] == $donnees_compte['mot_de_passe'])
+			if ($_POST['mot_de_passe'] == $donnees_compte['pass'])
 				{
-				echo '<br/>Connexion réussie';
-				$_SESSION['nom_de_compte'] 	= $_POST['nom_de_compte'];
-				$_SESSION['mot_de_passe'] 	= $donnees_compte['mot_de_passe'];
-				$_SESSION['rang'] 			= $donnees_compte['rang'];
+				$_SESSION['nom_utilisateur']= $_POST['nom_utilisateur'];
+				$_SESSION['mot_de_passe'] 	= $donnees_compte['pass'];
+				$_SESSION['level'] 			= $donnees_compte['level'];
 				$_SESSION['pseudo'] 		= $donnees_compte['pseudo'];
-				echo'<meta http-equiv=\'refresh\' content=\'1; URL=\'>';
 				}
 			else //Sinon, on l'indique au visiteur et on le redirige vers le formulaire.
 				{
-				echo '<br/>Les identifiants saisis sont incorrects.';
-				echo '<meta http-equiv=\'refresh\' content=\'1; URL=\'>';
+				echo '<p style="color:#000000;">Les identifiants saisis sont incorrects.</p>';
+				echo '<meta http-equiv=\'refresh\' content=\'1.5; URL=\'>';
 				}
 			}
 		}
 	//Si la variable de session contient quelque chose, on n\'affiche pas le formulaire mais un bouton de déconnexion.
-	elseif (isset ($_SESSION['nom_de_compte']))
-		{		
-		echo '	<form method=\'post\' action=\'\'>
-				<input type=\'submit\' name=\'deconnexion\' id=\'deconnexion\' value=\'Déconnexion\' />
-				</form>';
-		//Si on a envoyé le formulaire de déconnexion, on casse la session et on redirige vers la page d'accueil.
+	elseif (isset ($_SESSION['nom_utilisateur']))
+		{
 		if (isset ($_POST['deconnexion']))
 			{
 			session_destroy();
-			header('Location: #');
+			echo '<meta http-equiv=\'refresh\' content=\'0.2; URL=\'>';
 			}
 		}
-	//Si le formulaire n'a pas été envoyé, on l'affiche.
 	else
 		{
 		?>
-		<form method='post' action=''>
-		<p>
-		Connexion : <br/>
-		<input type="text" name="nom_de_compte" id="nom_de_compte" value="Nom de compte" onfocus="javascript:if(this.value == 'Nom de compte') this.value=''" onblur="javascript:if(this.value=='')this.value='Nom de compte'"name='nom_de_compte'> <br/>
-		<input type="password" name="mot_de_passe" id="mot_de_passe" value="Mot de passe" onfocus="javascript:if(this.value == 'Mot de passe') this.value=''" onblur="javascript:if(this.value=='')this.value='Mot de passe'"name='mot_de_passe'> <br/>
-		<input type='submit' name='envoyer' id='envoyer' value='Envoyer'>
-		</p>
-		</form>
-		<a href='http://localhost/tests/php-mysql/projet/membre.php' class='mdp_oublié'>(Mot de passe oublié?)</a>
+		<form method="post" action='index.php'><p>
+		<label for="id_nom_utilisateur">Nom de compte :</label>
+		<input id="id_nom_utilisateur" name="nom_utilisateur" type="text"/>
+		</p><p>
+		<label for="id_mot_de_passe">Mots de passe :</label>
+		<input id="id_mot_de_passe" name="mot_de_passe" type="password"/></p>
+		<input name="uniqid" type="hidden" value="menu"/>
+		<p><input name="submit" type="submit" class="button button-blue" value="Se connecter"/>
+		</p></form>
+		<a href="inscription.php" class="grey small">Créer un compte maintenant !</a><br/>
+		<a href="membre.php" class="grey small">Mot de passe oublié?</a>
 		<?php
 		}
 	}
@@ -78,14 +73,36 @@ catch(Exception $e)
 	die('Erreur : '.$e->getMessage());
 	}
 }
-function verif_rang() //Vérification de rang.
+function connectes() //Vérification de rang.
 {
-//On vérifie le rang du membre s'il est connecté, s'il n'est pas un simple membre on lui propose un lien vers le Panel.
-if (isset ($_SESSION['nom_de_compte']) AND ($_SESSION['rang']) != 'membre')
-	{
-	echo ' | <a href=\'panel.php\'>Panel</a>';
+if (isset ($_SESSION['nom_utilisateur']))
+	{		
+	echo '	<form method=\'post\' action=\'\'>
+			<input name="deconnexion" type="submit" class="button button-blue" value="Se déconnecter"/>
+			</form>
+			<img src="img/menu/submenuPuce.png" width="20" height="12" alt="Puce"/><a href="personnages.php"><a href=\'membre.php\'>Espace membre</a><br/>';
+	//On vérifie le rang du membre s'il est connecté, s'il n'est pas un simple membre on lui propose un lien vers le Panel.		
+	if (($_SESSION['level']) > '1')
+		{
+		echo '<img src="img/menu/submenuPuce.png" width="20" height="12" alt="Puce"/><a href="personnages.php"><a href=\'panel.php\'>Panel</a><br/>';
+		}
+	try
+		{
+		require('configuration.php');
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$nomBDD_other, $ident_mysql, $mdp_mysql, $pdo_options);
+		$verif_compte		=  $bdd->prepare('SELECT points FROM accounts WHERE account = :nom_utilisateur');
+		$verif_compte 		-> bindValue('nom_utilisateur', $_SESSION['nom_utilisateur'], PDO::PARAM_STR);
+		$verif_compte		-> execute();
+		$donnees			=  $verif_compte 	-> fetch();
+		$verif_compte 		-> closeCursor();
+		echo 'Vous avez '.$donnees['points'].' points';
+		}
+	catch(Exception $e)	
+		{
+		die('Erreur : '.$e->getMessage());
+		}
 	}
-echo '<br/>';
 }
 function reduit_texte($texte, $minlen, $maxlen, $separateur = ' ', $suffix = '') //Tronque une chaîne de caractères.
 {

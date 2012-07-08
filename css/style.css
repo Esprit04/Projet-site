@@ -1,0 +1,51 @@
+.nouveaute
+	{
+	width: 50%;
+	max-height : 300px;
+	margin: auto;
+	border: 1px solid #d5d6d5;
+	border-radius: 10px 5px 10px 5px;
+	text-align: justify;
+	padding: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	word-wrap: break-word;
+	overflow: auto;
+	}
+.titre
+	{
+	color: #008aaf;
+	font-weight:700;
+	font-size: 1.5em;
+	text-decoration: underline;
+	}
+.entete
+	{
+	display: block;
+	font-size: 0.9em;
+	}
+.img_new
+	{
+	display: block;
+	padding-left: 13%;
+	}
+.nouveaute a
+	{
+	color: #008aaf;
+	}
+.gestion_nouveaute
+	{
+	overflow: hidden;
+	display: inline-block;
+	max-width: 400px;
+	margin-bottom: 15px;
+	}
+h3
+	{
+	color: #008aaf;
+	text-decoration: underline;
+	}
+h4
+	{
+	text-decoration: underline;
+	}
