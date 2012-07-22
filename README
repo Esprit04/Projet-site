@@ -1,21 +1,21 @@
-CMS pour ancestra/dérivés.
+CMS pour ancestra/dï¿½rivï¿½s.
 
-Les fonctionnalités sont :
--Nouveautés par sql, avec possibilité de commenter, et une gestion de celles-ci.
--Panel admin : gestion des nouveautés, modification de rang (modérateur/admin/membre), et bannissement (accessible aux modérateurs & admins)
--Panel membre avec tout ses modules (changement pseudonyme/mot de passe & mot de passe oublié)
--inscription/connexion avec vérification de l’inexistence du nom de compte et pseudo à l'inscription plus un captcha.
--Statut bannis ip/compte : bloque l'accès au site.
--Pages liés à dofus : achats de points/vote...
+Les fonctionnalitï¿½s sont :
+-Nouveautï¿½s par sql, avec possibilitï¿½ de commenter, et une gestion de celles-ci.
+-Panel admin : gestion des nouveautï¿½s, modification de rang (modï¿½rateur/admin/membre), et bannissement (accessible aux modï¿½rateurs & admins)
+-Panel membre avec tout ses modules (changement pseudonyme/mot de passe & mot de passe oubliï¿½)
+-inscription/connexion avec vï¿½rification de lï¿½inexistence du nom de compte et pseudo ï¿½ l'inscription plus un captcha.
+-Statut bannis ip/compte : bloque l'accï¿½s au site.
+-Pages liï¿½s ï¿½ dofus : achats de points/vote...
 
 ======================================================
 Installation :
-Executez cms.sql sur votre base de données, configurez "configuration.php",
-Modifiez les idd/idp starpass dans la page crédit.php
-Supprimez le .git (dossier caché) et cms.sql/
+Executez cms.sql sur votre base de donnï¿½es, configurez "configuration.php",
+Modifiez les idd/idp starpass dans la page crï¿½dit.php
+Supprimez le .git (dossier cachï¿½), README et cms.sql/
 
 ======================================================
-Pages à faire :
+Pages ï¿½ faire :
 -boutique
 -services
 ======================================================
