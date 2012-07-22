@@ -1,21 +1,21 @@
-CMS pour ancestra/d�riv�s.
+CMS pour ancestra/derives.
 
-Les fonctionnalit�s sont :
--Nouveaut�s par sql, avec possibilit� de commenter, et une gestion de celles-ci.
--Panel admin : gestion des nouveaut�s, modification de rang (mod�rateur/admin/membre), et bannissement (accessible aux mod�rateurs & admins)
--Panel membre avec tout ses modules (changement pseudonyme/mot de passe & mot de passe oubli�)
--inscription/connexion avec v�rification de l�inexistence du nom de compte et pseudo � l'inscription plus un captcha.
--Statut bannis ip/compte : bloque l'acc�s au site.
--Pages li�s � dofus : achats de points/vote...
+Les fonctionnalites sont :
+-Nouveautes par sql, avec possibilite de commenter, et une gestion de celles-ci.
+-Panel admin : gestion des nouveautes, modification de rang (moderateur/admin/membre), et bannissement (accessible aux moderateurs & admins)
+-Panel membre avec tout ses modules (changement pseudonyme/mot de passe & mot de passe oublie
+-inscription/connexion avec verification de l'inexistence du nom de compte et pseudo à l'inscription plus un captcha.
+-Statut bannis ip/compte : bloque l'acces au site.
+-Pages lies à dofus : achats de points/vote...
 
 ======================================================
 Installation :
-Executez cms.sql sur votre base de donn�es, configurez "configuration.php",
-Modifiez les idd/idp starpass dans la page cr�dit.php
-Supprimez le .git (dossier cach�), README et cms.sql/
+Executez cms.sql sur votre base de donnees, configurez "configuration.php",
+Modifiez les idd/idp starpass dans la page credit.php
+Supprimez le .git (dossier cache), README et cms.sql/
 
 ======================================================
-Pages � faire :
+Pages à faire :
 -boutique
 -services
 ======================================================
